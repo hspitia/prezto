@@ -1,7 +1,8 @@
 #
-# A single line theme with Git information on the left and Ruby on the right.
+# A single line theme with Git information on the left based on sorin and jerome 
+# themes.
 #
-# Authors:
+# Initial Authors:
 #   Steve Losh <steve@stevelosh.com>
 #   Bart Trojanowski <bart@jukie.net>
 #   Brian Carper <brian@carper.ca>
@@ -12,6 +13,9 @@
 # Screenshots:
 #   http://i.imgur.com/gLgVp6Y.png
 #
+# Last modifications author:
+#   Hector Espitia <hspitia@gmail.com>
+
 root_prompt_char="#";
 # user_prompt_char="▸";
 # user_prompt_char="►";
@@ -35,10 +39,10 @@ function prompt_hspitia_precmd {
     git-info
   fi
 
-  # Get Ruby information.
-  if (( $+functions[ruby-info] )); then
-    ruby-info
-  fi
+  # # Get Ruby information.
+  # if (( $+functions[ruby-info] )); then
+  #   ruby-info
+  # fi
 }
 
 function prompt_hspitia_setup {
@@ -80,19 +84,20 @@ function prompt_hspitia_setup {
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
   zstyle ':prezto:module:git:info:branch' format "${_prompt_hspitia_colors[2]}%b%f"
-  zstyle ':prezto:module:git:info:added' format "${_prompt_hspitia_colors[5]}●%f"
-  zstyle ':prezto:module:git:info:deleted' format "${_prompt_hspitia_colors[2]}●%f"
-  zstyle ':prezto:module:git:info:modified' format "${_prompt_hspitia_colors[4]}●%f"
-  zstyle ':prezto:module:git:info:untracked' format "${_prompt_hspitia_colors[1]}●%f"
+  # zstyle ':prezto:module:git:info:added' format "${_prompt_hspitia_colors[5]}●%f"
+  # zstyle ':prezto:module:git:info:deleted' format "${_prompt_hspitia_colors[2]}●%f"
+  # zstyle ':prezto:module:git:info:modified' format "${_prompt_hspitia_colors[4]}●%f"
+  # zstyle ':prezto:module:git:info:untracked' format "${_prompt_hspitia_colors[1]}●%f"
+  # Complete based on sorin setup
+  # zstyle ':prezto:module:git:info:keys' format 'prompt' "${_prompt_hspitia_colors[2]}(%f"'%b%d%a%m%u'"${_prompt_hspitia_colors[2]})%f"
+  
+  
+  # Minimalist based on jerome setup
   # zstyle ':prezto:module:git:info:clean' format " ${_prompt_hspitia_colors[5]}✔%f"
   zstyle ':prezto:module:git:info:clean' format " ${_prompt_hspitia_colors[5]}●%f"
   # zstyle ':prezto:module:git:info:dirty' format " ${_prompt_hspitia_colors[5]}✗%f"
   zstyle ':prezto:module:git:info:dirty' format " ${_prompt_hspitia_colors[4]}●%f"
 
-  # Complete based on sorin setup
-  # zstyle ':prezto:module:git:info:keys' format 'prompt' "${_prompt_hspitia_colors[2]}(%f"'%b%d%a%m%u'"${_prompt_hspitia_colors[2]})%f"
-
-  # Minimalist based on jerome setup
   zstyle ':prezto:module:git:info:keys' format \
     'prompt' '${_prompt_hspitia_colors[2]}(%f$(coalesce "%b" "%p" "%c")${git_info[rprompt]}%s${_prompt_hspitia_colors[2]})%f' \
     'rprompt' '%C%D'
