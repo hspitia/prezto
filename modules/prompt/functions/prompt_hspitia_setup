@@ -82,16 +82,6 @@ function prompt_hspitia_setup {
     )
   fi
   
-  # Machine name in red color when connected to thebeast server
-  machine_color=${_prompt_hspitia_colors[5]};
-  if [[ "$(hostname)" == "biojordan" ]]; then
-    machine_color=${_prompt_hspitia_colors[4]};
-  fi
-  
-  # Define return status
-  # local ret_status="%(?:%{${_prompt_hspitia_colors[5]}${user_prompt_char}%f%}:%{${_prompt_hspitia_colors[4]}${user_prompt_char}%f%})"
-  local ret_status="%(?:%{${_prompt_hspitia_colors[5]}%}$(prompt_char)%f:%{${_prompt_hspitia_colors[4]}%}$(prompt_char)%f)"
-  
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
   zstyle ':prezto:module:git:info:branch' format "${_prompt_hspitia_colors[2]}%b%f"
@@ -112,6 +102,16 @@ function prompt_hspitia_setup {
   
   # # Set ruby-info parameters.
   # zstyle ':prezto:module:ruby:info:version' format '[%v]'
+  
+  # machine name in red color when connected to thebeast server
+  local machine_color=${_prompt_hspitia_colors[5]};
+  if [[ "$(hostname)" == "biojordan" ]]; then
+    machine_color=${_prompt_hspitia_colors[4]};
+  fi
+  
+  # Define return status
+  # local ret_status="%(?:%{${_prompt_hspitia_colors[5]}${user_prompt_char}%f%}:%{${_prompt_hspitia_colors[4]}${user_prompt_char}%f%})"
+  local ret_status="%(?:%{${_prompt_hspitia_colors[5]}%}$(prompt_char)%f:%{${_prompt_hspitia_colors[4]}%}$(prompt_char)%f)"
   
   # Define prompt elements
   local user_str="${_prompt_hspitia_colors[5]}%n%f";
