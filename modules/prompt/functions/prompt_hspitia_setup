@@ -68,6 +68,7 @@ function prompt_hspitia_setup {
       "%F{124}" # Hotpink
       # "%F{118}" # Limegreen
       "%F{034}" # Green
+      "%F{245}" # Grey
     )
   else
     _prompt_hspitia_colors=(
@@ -76,10 +77,17 @@ function prompt_hspitia_setup {
       "%F{magenta}"
       "%F{red}"
       "%F{green}"
+      "%F{white}"
     )
   fi
   
-  local ret_status="%(?:%{${_prompt_hspitia_colors[5]}%}${user_prompt_char}:%{${_prompt_hspitia_colors[4]}%}${user_prompt_char})"
+  machine_color=${_prompt_hspitia_colors[5]};
+  
+  if [[ "$(hostname)" == "biojordan" ]]; then
+    machine_color=${_prompt_hspitia_colors[4]};
+  fi
+  
+  local ret_status="%(?:%{${_prompt_hspitia_colors[5]}${user_prompt_char}%f%}:%{${_prompt_hspitia_colors[4]}${user_prompt_char}%f%})"
   
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
@@ -102,11 +110,20 @@ function prompt_hspitia_setup {
     'prompt' '${_prompt_hspitia_colors[2]}(%f$(coalesce "%b" "%p" "%c")${git_info[rprompt]}%s${_prompt_hspitia_colors[2]})%f' \
     'rprompt' '%C%D'
   
-  # Set ruby-info parameters.
-  zstyle ':prezto:module:ruby:info:version' format '[%v]'
-
+  # # Set ruby-info parameters.
+  # zstyle ':prezto:module:ruby:info:version' format '[%v]'
+  
+  # Define prompt elements
+  local user_str="${_prompt_hspitia_colors[5]}%n%f";
+  local machine_str="${machine_color}%m%f";
+  local at_str="${_prompt_hspitia_colors[6]}@%f";
+  local colon_str="${_prompt_hspitia_colors[6]}:%f";
+  local pwd_str="${_prompt_hspitia_colors[1]}%~%f ";
+  local status_str="${ret_status} "
+  
   # Define prompts.
-  PROMPT="%B${_prompt_hspitia_colors[5]}%n@${_prompt_hspitia_colors[5]}%m:%f${_prompt_hspitia_colors[1]}%~%f "'${git_info:+${(e)git_info[prompt]}}'"%F${ret_status}%f%b "
+  # PROMPT="%B${_prompt_hspitia_colors[5]}%n@${_prompt_hspitia_colors[5]}%m:%f${_prompt_hspitia_colors[1]}%~%f "'${git_info:+${(e)git_info[prompt]}}'"%F${ret_status}%f%b "
+  PROMPT="%B${user_str}${at_str}${machine_str}${colon_str}${pwd_str}"'${git_info:+${(e)git_info[prompt]}}'"${status_str}%b"
   # RPROMPT='%F{blue}${ruby_info[version]}'
   RPROMPT=''
 }
