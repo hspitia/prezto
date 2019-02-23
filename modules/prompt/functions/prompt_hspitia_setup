@@ -67,9 +67,11 @@ function prompt_hspitia_setup {
       "%F{135}" # Purple
       # "%F{161}" # Hotpink
       "%F{1}" # Red
+      # "%F{124}" # Red
       # "%F{118}" # Limegreen
       "%F{028}" # Green
       "%F{240}" # Grey
+      "%F{056}" # Purple
     )
   else
     _prompt_hspitia_colors=(
@@ -107,6 +109,8 @@ function prompt_hspitia_setup {
   local machine_color=${_prompt_hspitia_colors[5]};
   if [[ "$(hostname)" == "biojordan" ]]; then
     machine_color=${_prompt_hspitia_colors[4]};
+  elif [[ "$(hostname)" == "bioappsting" ]]; then
+    machine_color=${_prompt_hspitia_colors[2]};
   fi
   
   # Define return status
