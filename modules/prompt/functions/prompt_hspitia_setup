@@ -61,14 +61,14 @@ function prompt_hspitia_setup {
   if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
     _prompt_hspitia_colors=(
       # "%F{81}"  # Turquoise
-      "%F{032}"  # Turquoise
+      "%F{032}"  # Blue
       # "%F{166}" # Orange
       "%F{172}" # Orange
       "%F{135}" # Purple
       # "%F{161}" # Hotpink
-      "%F{124}" # Hotpink
+      "%F{1}" # Red
       # "%F{118}" # Limegreen
-      "%F{034}" # Green
+      "%F{028}" # Green
       "%F{240}" # Grey
     )
   else
