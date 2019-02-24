@@ -109,6 +109,8 @@ function prompt_hspitia_setup {
   local machine_color=${_prompt_hspitia_colors[5]};
   if [[ "$(hostname)" == "biojordan" ]]; then
     machine_color=${_prompt_hspitia_colors[4]};
+  elif [[ "$(hostname)" == "bioappsting" ]]; then
+    machine_color=${_prompt_hspitia_colors[2]};
   fi
   
   # Define return status
