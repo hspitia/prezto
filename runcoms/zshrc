@@ -10,13 +10,53 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# # Customize to your needs...
+# Customize to your needs...
+# ====================================================================
+# ZSH options
+# ====================================================================
+unsetopt CORRECT                      # Disable autocorrect guesses. Happens when typing a wrong
+                                      # command that may look like an existing one.
+expand-or-complete-with-dots() {      # This bunch of code displays red dots when autocompleting
+  echo -n "\e[31m......\e[0m"         # a command with the tab key, "Oh-my-zsh"-style.
+  zle expand-or-complete
+  zle redisplay
+}
+zle -N expand-or-complete-with-dots
+bindkey "^I" expand-or-complete-with-dots
+
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+# zle -N edit-command-line
+# bindkey '^xe' edit-command-line
+# bindkey '^x^e' edit-command-line
+# Vi style:
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# Custom config
 source $HOME/.customrc.sh
-# PATH="/home/hspitia/perl5/bin${PATH:+:${PATH}}"; export PATH;
-# PERL5LIB="/home/hspitia/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-# PERL_LOCAL_LIB_ROOT="/home/hspitia/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-# PERL_MB_OPT="--install_base \"/home/hspitia/perl5\""; export PERL_MB_OPT;
-# PERL_MM_OPT="INSTALL_BASE=/home/hspitia/perl5"; export PERL_MM_OPT;
+
+# # Tilix
+# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+#        source /etc/profile.d/vte.sh
+# fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/data/home/hfen3/.software/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/data/home/hfen3/.software/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/data/home/hfen3/.software/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/data/home/hfen3/.software/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
 
 # cll 55 99-250 3106247869
 
